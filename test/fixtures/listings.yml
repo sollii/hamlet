@@ -1,0 +1,41 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  neighborhood: MyString
+  street: MyString
+  city: MyString
+  state: MyString
+  zip: 1
+  bedrooms: 1
+  bathrooms: 1
+  sq_footage: 1
+  lot_footage: 1
+  housing_style: MyString
+  description: MyString
+  property_type: MyString
+  year: 1
+  price_per_sqft: 1
+  tax_valuation: 1
+  taxes: 1
+  land_value: 1
+  additions: 1
+
+two:
+  neighborhood: MyString
+  street: MyString
+  city: MyString
+  state: MyString
+  zip: 1
+  bedrooms: 1
+  bathrooms: 1
+  sq_footage: 1
+  lot_footage: 1
+  housing_style: MyString
+  description: MyString
+  property_type: MyString
+  year: 1
+  price_per_sqft: 1
+  tax_valuation: 1
+  taxes: 1
+  land_value: 1
+  additions: 1
