@@ -12,7 +12,7 @@ module GeoMathHelper
     def getMatrixTimes(source, destinations)
         call = buildGoogMatrixCall(source, destinations)
         encoded = URI.encode call
-        return RestClient.get encoded
+        return JSON.parse(RestClient.get(encoded))
     end
 
     def buildGoogMatrixCall(source, destinations)

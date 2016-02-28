@@ -2,4 +2,5 @@
 require File.expand_path('../application', __FILE__)
 # Initialize the Rails application.
 Rails.application.initialize!
-ENV['SSL_CERT_FILE'] = '~/Desktop/hamlet/cacert.pem'
+cert_path = Gem.loaded_specs['google-api-client'].full_gem_path+'/lib/cacerts.pem'
+ENV['SSL_CERT_FILE'] = cert_path
