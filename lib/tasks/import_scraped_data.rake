@@ -1,5 +1,5 @@
 namespace :import_scraped_data do
-  desc "TODO"
+  desc "Import listings from excel to database"
   task listings: :environment do
 
     filename = 'tmp/scraped_data/realtor_berkeley.csv'
@@ -17,6 +17,13 @@ namespace :import_scraped_data do
         puts "created listing at #{address}!"
       end
     end
+  end
+
+  desc "Gets the lat and long of addresses from GoogleAPI then add it to the model"
+  task add_lat_and_long_data: :environment do
+
+
+
   end
 
 end
