@@ -9,15 +9,10 @@ module GoogleApiHelper
     def call_api(api, format, params)
         params = URI.encode params
         url = build_url(api, format, params)
-        print url
         return JSON.parse(RestClient.get(url))
     end
 
     def get_lat_long(address)
         call_api('geocode', 'json', "address=#{address}")
-    end
-
-    def t
-        get_lat_long "1600 Amphitheatre Parkway, Mountain View, CA"
     end
 end

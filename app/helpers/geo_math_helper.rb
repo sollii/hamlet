@@ -3,6 +3,7 @@ module GeoMathHelper
     @GOOGL_API_KEY = 'AIzaSyAi-E59X3_vswQ9fwc5xhxoZhPTYe_kARs'
     @mapquest = MapQuest.new @MQ_API_KEY
 
+
     def getMQLatLon(address)
         data = mapquest.geocoding.address address
         data.locations.each { |location| puts location[:latLng][:lat], location[:latLng][:lng] }
