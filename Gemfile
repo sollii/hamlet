@@ -21,7 +21,7 @@ gem "font-awesome-rails"
 gem 'gemoji'
 gem 'smarter_csv'
 gem 'mapquest'
-gem 'openssl'
+gem 'rest-client'
 
 group :development do
   gem 'sqlite3'
