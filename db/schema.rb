@@ -11,29 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160225043100) do
+ActiveRecord::Schema.define(version: 20160228041303) do
 
-  create_table "listings", force: :cascade do |t|
-    t.string   "neighborhood"
-    t.string   "street"
-    t.string   "city"
-    t.string   "state"
-    t.integer  "zip"
-    t.integer  "bedrooms"
-    t.integer  "bathrooms"
-    t.integer  "sq_footage"
-    t.integer  "lot_footage"
-    t.string   "housing_style"
-    t.string   "description"
-    t.string   "property_type"
-    t.integer  "year"
-    t.integer  "price_per_sqft"
-    t.integer  "tax_valuation"
-    t.integer  "taxes"
-    t.integer  "land_value"
-    t.integer  "additions"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+  create_table "addresses", force: :cascade do |t|
+    t.string   "text"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
+
+  create_table "places", force: :cascade do |t|
+    t.integer  "address_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "type"
+  end
+
+  add_index "places", ["address_id"], name: "index_places_on_address_id"
 
 end

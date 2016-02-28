@@ -1,2 +1,2 @@
-class Listing < ActiveRecord::Base
+class Listing < Place
 end
