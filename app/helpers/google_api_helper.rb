@@ -16,8 +16,4 @@ module GoogleApiHelper
     def get_lat_long(address)
         call_api('geocode', 'json', "address=#{address}")
     end
-
-    def t
-        get_lat_long "1600 Amphitheatre Parkway, Mountain View, CA"
-    end
 end
