@@ -10,12 +10,12 @@ module GeoMathHelper
     end
 
     def getMatrixTimes(source, destinations)
-        call = buildGoogMatrixCall(source, destinations)
+        call = buildMatrixCall(source, destinations)
         encoded = URI.encode call
         return JSON.parse(RestClient.get(encoded))
     end
 
-    def buildGoogMatrixCall(source, destinations)
+    private def buildMatrixCall(source, destinations)
         call = "https://maps.googleapis.com/maps/api/distancematrix/json?origins="
         source.gsub(/\s+/, '+')
         call += source + "&destinations="
@@ -24,5 +24,22 @@ module GeoMathHelper
             call += address + '|'
         end
         call += "&mode=driving&key=#{@GOOGL_API_KEY}"
+    end
+
+    private def testMatrixTimes
+        count = 0
+        source = "2133 Haste St. Berkeley"
+        destinations = []
+        (0..10).each do |testnum|
+            Listing.all.each do |listing|
+                break if count == 5
+                count += 1
+                addr = "#{listing.address.street} #{listing.address.city}"
+                destinations.append(addr)
+            end
+            puts getMatrixTimes(source, destinations)
+            count = 0
+        end
+        puts "Test complete."
     end
 end
