@@ -13,6 +13,9 @@ module GoogleApiHelper
     end
 
     def get_lat_long(address)
-        call_api('geocode', 'json', "address=#{address}")
+        response = call_api('geocode', 'json', "address=#{address}")
+        if response["results"] and response["results"][0]
+            return response["results"][0]["geometry"]["location"]
+        end
     end
 end
