@@ -1,5 +1,4 @@
 module GeoMathHelper
-    require 'open-uri'
     @MQ_API_KEY = 'PU4VcE4iuXOU2dUCPmUVHzqmdZzsEhYI'
     @GOOGL_API_KEY = 'AIzaSyAi-E59X3_vswQ9fwc5xhxoZhPTYe_kARs'
     @mapquest = MapQuest.new @MQ_API_KEY
