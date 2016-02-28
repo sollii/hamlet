@@ -25,5 +25,4 @@ module GeoMathHelper
         end
         call += "&mode=driving&key=#{@GOOGL_API_KEY}"
     end
-    traveltime = open("https://maps.googleapis.com/maps/api/distancematrix/json?origins=Vancouver+BC|Seattle&destinations=San+Francisco|Victoria+BC&mode=bicycling&language=fr-FR&key=#{@GOOGL_API_KEY}")
 end
