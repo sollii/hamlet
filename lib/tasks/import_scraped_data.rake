@@ -6,12 +6,15 @@ namespace :import_scraped_data do
     options = {:chunk_size => 100}
     listings = SmarterCSV.process(filename, options) do |chunk|
       chunk.each do |listing|
-        listing_data = {
-
+        address_data = {
+          street: listing[:street],
+          city: listing[:city],
+          state: listing[:state],
+          zip: listing[:zip]
         }
-
-        Organization.create org_data
-        puts "created #{org[:name]}!"
+        address = Address.create address_data
+        Listing.create address: address
+        puts "created listing at #{address}!"
       end
     end
   end
