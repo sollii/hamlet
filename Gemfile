@@ -20,6 +20,8 @@ gem "private_pub"
 gem "font-awesome-rails"
 gem 'gemoji'
 gem 'smarter_csv'
+gem 'mapquest'
+gem 'openssl'
 
 group :development do
   gem 'sqlite3'
