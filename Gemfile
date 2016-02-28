@@ -22,6 +22,7 @@ gem 'gemoji'
 gem 'smarter_csv'
 gem 'mapquest'
 gem 'rest-client'
+gem 'google-api-client'
 
 group :development do
   gem 'sqlite3'
