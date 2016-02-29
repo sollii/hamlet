@@ -1,7 +1,8 @@
 module GeoMathHelper
-    @MQ_API_KEY = 'PU4VcE4iuXOU2dUCPmUVHzqmdZzsEhYI'
-    @GOOGL_API_KEY = 'AIzaSyAi-E59X3_vswQ9fwc5xhxoZhPTYe_kARs'
-    @mapquest = MapQuest.new @MQ_API_KEY
+    @@MQ_API_KEY = 'PU4VcE4iuXOU2dUCPmUVHzqmdZzsEhYI'
+    @@GOOGL_API_KEY = 'AIzaSyAi-E59X3_vswQ9fwc5xhxoZhPTYe_kARs'
+    @@BASE_MATRIX_URI = "https://maps.googleapis.com/maps/api/distancematrix/json?origins="
+    @@mapquest = MapQuest.new @@MQ_API_KEY
 
     def get_MQ_latLon(address)
         data = mapquest.geocoding.address address
@@ -16,14 +17,14 @@ module GeoMathHelper
     end
 
     private def build_matrix_call(source, destinations)
-        call = "https://maps.googleapis.com/maps/api/distancematrix/json?origins="
+        call = @@BASE_MATRIX_URI
         source.gsub(/\s+/, '+')
         call += source + "&destinations="
         destinations.each do |address|
             address.gsub(/\s+/, '+')
             call += address + '|'
         end
-        call += "&mode=driving&key=#{@GOOGL_API_KEY}"
+        call += "&mode=driving&key=#{@@GOOGL_API_KEY}"
     end
 
     private def test_matrix_times
