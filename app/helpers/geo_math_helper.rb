@@ -3,18 +3,19 @@ module GeoMathHelper
     @GOOGL_API_KEY = 'AIzaSyAi-E59X3_vswQ9fwc5xhxoZhPTYe_kARs'
     @mapquest = MapQuest.new @MQ_API_KEY
 
-    def getMQLatLon(address)
+    def get_MQ_latLon(address)
         data = mapquest.geocoding.address address
         data.locations.each { |location| puts location[:latLng][:lat], location[:latLng][:lng] }
     end
 
-    def getMatrixTimes(source, destinations)
-        call = buildMatrixCall(source, destinations)
+    def get_matrix_times(source, destinations)
+        call = build_matrix_call(source, destinations)
         encoded = URI.encode call
-        return JSON.parse(RestClient.get(encoded))
+
+        return
     end
 
-    private def buildMatrixCall(source, destinations)
+    private def build_matrix_call(source, destinations)
         call = "https://maps.googleapis.com/maps/api/distancematrix/json?origins="
         source.gsub(/\s+/, '+')
         call += source + "&destinations="
@@ -25,7 +26,7 @@ module GeoMathHelper
         call += "&mode=driving&key=#{@GOOGL_API_KEY}"
     end
 
-    private def testMatrixTimes
+    private def test_matrix_times
         count = 0
         source = "2133 Haste St. Berkeley"
         destinations = []
@@ -33,11 +34,13 @@ module GeoMathHelper
             Listing.all.each do |listing|
                 break if count == 5
                 count += 1
-                addr = "#{listing.address.street} #{listing.address.city}"
+                addr = "#{listing.address.to_s}"
                 destinations.append(addr)
             end
-            puts getMatrixTimes(source, destinations)
+            puts get_matrix_times(source, destinations)
             count = 0
+            destinations = []
+            puts "\n Test #{testnum} with #{destinations.to_s()}\n"
         end
         puts "Test complete."
     end
