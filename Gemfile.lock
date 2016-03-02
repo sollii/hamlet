@@ -101,6 +101,11 @@ GEM
     gemoji (2.1.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    gon (6.0.1)
+      actionpack (>= 3.0)
+      json
+      multi_json
+      request_store (>= 1.0)
     google-api-client (0.9.3)
       addressable (~> 2.3)
       googleauth (~> 0.5)
@@ -164,6 +169,10 @@ GEM
       faye
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
+    rabl-rails (0.4.2)
+      activesupport (>= 3.1)
+      railties (>= 3.1)
+      thread_safe (~> 0.3.1)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -202,6 +211,7 @@ GEM
       json (~> 1.4)
     representable (2.3.0)
       uber (~> 0.0.7)
+    request_store (1.3.0)
     responders (2.1.1)
       railties (>= 4.2.0, < 5.1)
     rest-client (1.8.0)
@@ -284,6 +294,7 @@ DEPENDENCIES
   font-awesome-rails
   foundation-rails (= 5.4.5)
   gemoji
+  gon
   google-api-client
   jbuilder (~> 2.0)
   jquery-rails
@@ -292,6 +303,7 @@ DEPENDENCIES
   pg
   private_pub
   quiet_assets
+  rabl-rails
   rails (= 4.2.0)
   rails_12factor
   rails_layout
