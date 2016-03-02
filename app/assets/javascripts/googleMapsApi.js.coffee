@@ -2,6 +2,7 @@ class GoogleMaps
   constructor: (@container, @center) ->
     @initZoom = 12
     @map = @initMap()
+    @listings = []
 
   initMap: ->
     new google.maps.Map($("#{@container}")[0], {
@@ -10,8 +11,10 @@ class GoogleMaps
     })
 
   addListingMarkers: (listings) ->
-    @listings = listings.map (listing) =>
+    renderedListings = listings.map (listing) =>
       @addListingMarker(listing)
+
+    @listings = @listings.concat(renderedListings)
 
   createListingMarker: (listing) ->
     new google.maps.Marker({
@@ -34,5 +37,6 @@ class GoogleMaps
 
   clearAllListings: ->
     @clearListings(@listings)
+    @listings = []
 
 window.GoogleMaps = GoogleMaps
