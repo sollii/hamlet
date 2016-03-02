@@ -23,6 +23,8 @@ gem 'smarter_csv'
 gem 'mapquest'
 gem 'rest-client'
 gem 'google-api-client'
+gem 'gon'
+gem 'rabl-rails'
 
 group :development do
   gem 'sqlite3'
