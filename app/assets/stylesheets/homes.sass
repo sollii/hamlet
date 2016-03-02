@@ -1,7 +1,22 @@
 // Place all the styles related to the homes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import partials/variables
+@import partials/mixins
 
-
-#map
+#listings
+  position: relative
   height: 100%
+  width: 100%
+  +clearfix
+
+#listings-dashboard
+  float: left
+  width: 400px
+  background-color: $light-blue
+  height: 100%
+
+#listings-map
+  float: left
+  height: 100%
+  width: calc(100% - 400px)
