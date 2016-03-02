@@ -1,47 +1,56 @@
 module GeoMathHelper
-    @@MQ_API_KEY = 'PU4VcE4iuXOU2dUCPmUVHzqmdZzsEhYI'
     @@GOOGL_API_KEY = 'AIzaSyAi-E59X3_vswQ9fwc5xhxoZhPTYe_kARs'
     @@BASE_MATRIX_URI = "https://maps.googleapis.com/maps/api/distancematrix/json?origins="
-    @@mapquest = MapQuest.new @@MQ_API_KEY
 
-    def get_MQ_latLon(address)
-        data = mapquest.geocoding.address address
-        data.locations.each { |location| puts location[:latLng][:lat], location[:latLng][:lng] }
-    end
-
-    def get_matrix_times(source, destinations)
+    def get_matrix_dist(source, destinations)
         call = build_matrix_call(source, destinations)
         encoded = URI.encode call
-
-        return
+        return JSON.parse(RestClient.get(encoded))
     end
+
+    def filter_matrix(source, destinations, max_dist, max_time)
+        matrix_result = get_matrix_dist(source, destinations)
+        if (matrix_result["status"] == "OK")
+            filtered_destinations = []
+            puts matrix_result["rows"][0]["elements"]
+            matrix_result["rows"][0]["elements"].each_with_index do |result, index|
+                if (result["distance"]["value"] <= max_dist and result["duration"]["value"] <= max_time)
+                    filtered_destinations.append(destinations[index])
+                end
+            end
+        end
+        return filtered_destinations
+    end
+
+    def test
+        filter_matrix(Listing.first.address.to_s, Listing.all.collect {|listing| listing.address}[0..5], 0, 0)
+    end
+
+
 
     private def build_matrix_call(source, destinations)
         call = @@BASE_MATRIX_URI
-        source.gsub(/\s+/, '+')
-        call += source + "&destinations="
+        call += "#{source}&destinations="
         destinations.each do |address|
-            address.gsub(/\s+/, '+')
-            call += address + '|'
+            call += "#{address.latitude} #{address.longitude}|"
         end
         call += "&mode=driving&key=#{@@GOOGL_API_KEY}"
     end
 
-    private def test_matrix_times
+    private def test_matrix_dist
         count = 0
-        source = "2133 Haste St. Berkeley"
+        source = Listing.last.address
         destinations = []
         (0..10).each do |testnum|
             Listing.all.each do |listing|
                 break if count == 5
                 count += 1
-                addr = "#{listing.address.to_s}"
-                destinations.append(addr)
+                destinations.append(listing.address)
             end
-            puts get_matrix_times(source, destinations)
+            puts get_matrix_dist(source, destinations)
+            puts "\n Test #{testnum} completed with #{destinations.to_s()}\n"
             count = 0
             destinations = []
-            puts "\n Test #{testnum} with #{destinations.to_s()}\n"
         end
         puts "Test complete."
     end
