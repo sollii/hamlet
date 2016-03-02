@@ -1,0 +1,22 @@
+<h1> Welcome to Hamlet </h1>
+
+<h2> Begin the search for your perfect home. </h2>
+
+<%= form_tag search_path do %>
+  <%= label_tag :source, "Where do you work?" %>
+  <%= text_area_tag :source %>
+  <%= label_tag :max_dist, "How far do you want to commute? (Minutes)" %>
+  <%= text_area_tag :max_dist %>
+  <%= label_tag :max_time, "How long do you want to commute? (Kilometers)" %>
+  <%= text_area_tag :max_time %>
+  <%= submit_tag "Search!" %>
+<% end %>
+
+<h3> Current listings in Berkeley: </h3>
+
+<% @all_listings_in_berkeley.each do |address| %>
+<p>
+  <%= address.to_s %>
+</p>
+<% end %>
+

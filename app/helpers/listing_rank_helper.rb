@@ -7,6 +7,7 @@ module ListingRankHelper
     end
 
     private def get_distances(listing_address, poi_prefs)
+
     end
 
     private def get_distance_scale(user)
