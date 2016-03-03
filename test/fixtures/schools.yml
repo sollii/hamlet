@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  address_id: 
+  rating: 1
+  gsid: 1
+  parent_rating: 1
+
+two:
+  address_id: 
+  rating: 1
+  gsid: 1
+  parent_rating: 1
