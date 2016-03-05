@@ -16,6 +16,12 @@ Sequel.migration do
       primary_key [:filename]
     end
     
+    create_table(:test_filters) do
+      primary_key :id
+      column :param_1, "varchar(255)"
+      column :param_2, "varchar(255)"
+    end
+    
     create_table(:users) do
       primary_key :id
       column :email, "varchar(255)", :default=>"", :null=>false
@@ -38,7 +44,6 @@ Sequel.migration do
     create_table(:filters) do
       primary_key :id
       foreign_key :user_id, :users
-      column :function, "varchar(255)"
       column :filter_type, "varchar(255)", :null=>false
       column :precedence, "integer"
     end
@@ -70,5 +75,6 @@ self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160305005045_cr
 self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160305005430_create_schools.rb')"
 self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160305011514_create_filters.rb')"
 self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160305014614_devise_create_users.rb')"
+self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160305023025_create_test_filters.rb')"
                 end
               end
