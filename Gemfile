@@ -25,7 +25,9 @@ gem 'rest-client'
 gem 'google-api-client'
 gem 'rabl-rails'
 gem 'gon'
-gem "sequel-rails"
+gem 'sequel-rails'
+gem 'sequel-devise'
+gem 'sequel-devise-generators'
 
 group :development do
   gem 'sqlite3'
