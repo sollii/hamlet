@@ -8,6 +8,7 @@ module GoogleApiHelper
 
   def call_api(api, format, params)
     url = build_url(api, format)
+    params = params.merge({key: @@GOOGLE_API_KEY})
     return JSON.parse(RestClient.get(url, params: params))
   end
 
