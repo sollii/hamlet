@@ -4,7 +4,7 @@ Sequel.migration do
     create_table :addresses do
       primary_key :id
       Float :lat
-      Float :lng
+      Float :lon
       String :street
       String :city
       String :state

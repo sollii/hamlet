@@ -3,7 +3,7 @@ Sequel.migration do
     create_table(:addresses) do
       primary_key :id
       column :lat, "double precision"
-      column :lng, "double precision"
+      column :lon, "double precision"
       column :street, "varchar(255)"
       column :city, "varchar(255)"
       column :state, "varchar(255)"
@@ -60,15 +60,18 @@ Sequel.migration do
       column :bathrooms, "double precision", :default=>0.0
       column :sq_footage, "integer", :default=>0
       column :year, "integer", :default=>0
-      column :value, "integer", :default=>0
+      column :price, "integer", :default=>0
     end
     
     create_table(:schools) do
       foreign_key :id, :places
-      column :rating, "integer"
-      column :gsid, "varchar(255)"
-      column :integer, "varchar(255)"
-      column :parent_rating, "integer"
+      column :name, "varchar(255)"
+      column :school_type, "varchar(255)"
+      column :gs_rating, "varchar(255)"
+      column :parent_rating, "varchar(255)"
+      column :grade_range, "varchar(255)"
+      column :enrollment, "varchar(255)"
+      column :website, "varchar(255)"
     end
   end
 end

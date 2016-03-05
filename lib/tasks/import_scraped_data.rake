@@ -20,7 +20,7 @@ namespace :import_scraped_data do
   end
 
   desc "Gets the lat and long of addresses from GoogleAPI then add it to the model"
-  task add_lat_and_long_data: :environment do
+  task add_lat_and_lon_data: :environment do
     include GoogleApiHelper
 
     Address.where(lng: nil).each do |address|
