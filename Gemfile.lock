@@ -163,6 +163,10 @@ GEM
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     orm_adapter (0.5.0)
+    orm_adapter-sequel (0.1.0)
+      activemodel (>= 3.0.0)
+      orm_adapter (>= 0.4.0)
+      sequel (>= 3.18.0)
     os (0.9.6)
     pg (0.18.4)
     private_pub (1.0.3)
@@ -229,6 +233,19 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    sequel (4.32.0)
+    sequel-devise (0.0.7)
+      devise
+      orm_adapter-sequel
+    sequel-devise-generators (0.1.1)
+      rails (>= 3.2)
+      sequel-devise (>= 0.0.3)
+      sequel-rails (>= 0.9.1)
+    sequel-rails (0.9.12)
+      actionpack (>= 3.2.0)
+      activemodel
+      railties (>= 3.2.0)
+      sequel (>= 3.28, < 5.0)
     signet (0.7.2)
       addressable (~> 2.3)
       faraday (~> 0.9)
@@ -311,6 +328,9 @@ DEPENDENCIES
   sass (= 3.4)
   sass-rails
   sdoc (~> 0.4.0)
+  sequel-devise
+  sequel-devise-generators
+  sequel-rails
   simple_form
   slim-rails
   smarter_csv

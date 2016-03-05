@@ -32,7 +32,6 @@ module GoogleApiHelper
     listing_addresses = listings.collect {|listing| listing.address.to_s}
     response = destinations_dist_from_source(source, listing_addresses)
     if (response["status"] == "OK")
-      puts response
       filtered_listings = []
       response["rows"][0]["elements"].each_with_index do |result, index|
         if (result["distance"]["value"] <= max_dist and result["duration"]["value"] <= max_time)
