@@ -56,6 +56,11 @@ Sequel.migration do
     
     create_table(:listings) do
       foreign_key :id, :places
+      column :bedrooms, "double precision", :default=>0.0
+      column :bathrooms, "double precision", :default=>0.0
+      column :sq_footage, "integer", :default=>0
+      column :year, "integer", :default=>0
+      column :value, "integer", :default=>0
     end
     
     create_table(:schools) do
@@ -76,5 +81,6 @@ self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160305005430_cr
 self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160305011514_create_filters.rb')"
 self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160305014614_devise_create_users.rb')"
 self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160305023025_create_test_filters.rb')"
+self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160305030926_add_columns_to_listing.rb')"
                 end
               end

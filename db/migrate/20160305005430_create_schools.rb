@@ -5,7 +5,6 @@ Sequel.migration do
       foreign_key :id, :places
       Integer :rating
       String :gsid
-      String :integer
       Integer :parent_rating
     end
 
