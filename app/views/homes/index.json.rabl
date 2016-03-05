@@ -1,3 +1,3 @@
 collection :@homes
 attributes :address
-node(:latlong) { |home| {lat: home.address.latitude, lng: home.address.longitude }}
+node(:latlong) { |home| {lat: home.address.lat, lng: home.address.lng }}
