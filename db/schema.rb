@@ -60,14 +60,13 @@ Sequel.migration do
       column :bathrooms, "double precision", :default=>0.0
       column :sq_footage, "integer", :default=>0
       column :year, "integer", :default=>0
-      column :value, "integer", :default=>0
+      column :price, "integer", :default=>0
     end
     
     create_table(:schools) do
       foreign_key :id, :places
       column :rating, "integer"
       column :gsid, "varchar(255)"
-      column :integer, "varchar(255)"
       column :parent_rating, "integer"
     end
   end
