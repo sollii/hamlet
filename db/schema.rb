@@ -9,19 +9,26 @@ Sequel.migration do
       column :state, "varchar(255)"
       column :zip, "integer"
     end
-
+    
+    create_table(:home_characteristics_filters) do
+      primary_key :id
+      column :bedrooms, "varchar(255)"
+      column :bathrooms, "varchar(255)"
+      column :sq_footage, "varchar(255)"
+    end
+    
     create_table(:schema_migrations) do
       column :filename, "varchar(255)", :null=>false
-
+      
       primary_key [:filename]
     end
-
+    
     create_table(:test_filters) do
       primary_key :id
       column :param_1, "varchar(255)"
       column :param_2, "varchar(255)"
     end
-
+    
     create_table(:users) do
       primary_key :id
       column :email, "varchar(255)", :default=>"", :null=>false
@@ -36,24 +43,24 @@ Sequel.migration do
       column :last_sign_in_ip, "varchar(255)"
       column :created_at, "timestamp"
       column :updated_at, "timestamp"
-
+      
       index [:email], :unique=>true
       index [:reset_password_token], :unique=>true
     end
-
+    
     create_table(:filters) do
       primary_key :id
       foreign_key :user_id, :users
       column :filter_type, "varchar(255)", :null=>false
       column :precedence, "integer"
     end
-
+    
     create_table(:places) do
       primary_key :id
       foreign_key :address_id, :addresses
       column :place_type, "varchar(255)", :null=>false
     end
-
+    
     create_table(:listings) do
       foreign_key :id, :places
       column :bedrooms, "double precision", :default=>0.0
@@ -62,7 +69,7 @@ Sequel.migration do
       column :year, "integer", :default=>0
       column :price, "integer", :default=>0
     end
-
+    
     create_table(:schools) do
       foreign_key :id, :places
       column :name, "varchar(255)"
@@ -85,5 +92,6 @@ self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160305011514_cr
 self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160305014614_devise_create_users.rb')"
 self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160305023025_create_test_filters.rb')"
 self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160305030926_add_columns_to_listing.rb')"
+self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160305052643_create_home_characteristics_filters.rb')"
                 end
               end
