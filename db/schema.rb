@@ -10,6 +10,11 @@ Sequel.migration do
       column :zip, "integer"
     end
     
+    create_table(:distance_to_work_filters) do
+      primary_key :id
+      column :distance_to_work, "integer"
+    end
+    
     create_table(:home_characteristics_filters) do
       primary_key :id
       column :bedrooms, "varchar(255)"
@@ -21,6 +26,12 @@ Sequel.migration do
       column :filename, "varchar(255)", :null=>false
       
       primary_key [:filename]
+    end
+    
+    create_table(:school_filters) do
+      primary_key :id
+      column :desired_schools, "varchar(255)"
+      column :rating, "varchar(255)"
     end
     
     create_table(:test_filters) do
@@ -93,5 +104,7 @@ self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160305014614_de
 self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160305023025_create_test_filters.rb')"
 self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160305030926_add_columns_to_listing.rb')"
 self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160305052643_create_home_characteristics_filters.rb')"
+self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160308022603_create_distance_to_work_filters.rb')"
+self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160308023038_create_school_district_filters.rb')"
                 end
               end

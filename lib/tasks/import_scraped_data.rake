@@ -35,12 +35,12 @@ namespace :import_scraped_data do
   task add_lat_and_lon_data: :environment do
     include GoogleApiHelper
 
-    Address.where(lng: nil).each do |address|
+    Address.where(lon: nil).each do |address|
       location = get_lat_long(address.to_s)
       address.lat = location["lat"]
-      address.lng = location["lng"]
+      address.lon = location["lon"]
       address.save
-      puts "lat lng found for #{address}"
+      puts "lat lon found for #{address}"
     end
   end
 

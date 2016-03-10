@@ -8,7 +8,7 @@ class SchoolFilter < Filter
 
     school_lat_lon_limits = []
     desired_schools.each do |school|
-      school_lat_lon_limits = get_school_lat_lon_limit(school)
+      school_lat_lon_limits.append(get_school_lat_lon_limit(school))
     end
 
     return listings.where{is_listing_in_school_range(address, desired_schools, school_lat_lon_limits)}
@@ -22,8 +22,8 @@ class SchoolFilter < Filter
 
     earth_r = 6378137
 
-    dn = 800
-    de = 800
+    dn = 2000
+    de = 2000
 
     dLat = dn/earth_r
     dLon = de/(earth_r*Math.cos(Math::PI*lat/180))
@@ -35,9 +35,14 @@ class SchoolFilter < Filter
   end
 
   def is_listing_in_school_range(address, desired_schools, school_lat_lon_limits)
-    desired_schools.each do |school|
-
+    address_lat = address.lat
+    address_lon = address.lon
+    desired_schools.each_with_index do |school, index|
+      if (((address_lat - school.address.lat).abs > school_lat_lon_limits[index][0]) && ((address_lon - school.address.lon).abs > school_lat_lon_limits[index][1]))
+        return false
+      end
     end
+    return true
   end
 
 end
