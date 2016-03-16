@@ -38,7 +38,7 @@ namespace :import_scraped_data do
     Address.where(lon: nil).each do |address|
       location = get_lat_long(address.to_s)
       address.lat = location["lat"]
-      address.lon = location["lon"]
+      address.lon = location["lng"]
       address.save
       puts "lat lon found for #{address}"
     end
