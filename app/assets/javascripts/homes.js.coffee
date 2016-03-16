@@ -20,7 +20,7 @@ $ ->
     dataType: "json"
 
 initGMaps = ->
-  map = new GoogleMaps("#listings-map", {lat: 37.871470, lng: -122.273584})
+  map = new GoogleMaps("#listings-map", {lat: 37.871470, lon: -122.273584})
   map.addListingMarkers(gon.homes)
 
   $("#clear-markers").click ->
