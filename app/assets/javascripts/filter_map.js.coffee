@@ -1,7 +1,8 @@
-class FilterMap extends GoogleMaps
 
-  constructor: (@container, @center) ->
-    super(@container, @center)
-    @filters = []
+# class FilterMap extends GoogleMaps
 
-  addFilter: (filter) ->
+#   constructor: (@container, @center) ->
+#     super(@container, @center)
+#     @filters = []
+
+#   addFilter: (filter) ->

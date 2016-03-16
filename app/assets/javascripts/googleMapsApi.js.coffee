@@ -17,6 +17,7 @@ class GoogleMaps
     @listings = @listings.concat(renderedListings)
 
   createListingMarker: (listing) ->
+    console.log listing
     new google.maps.Marker({
       position: listing.latlong,
       map: @map
