@@ -5,5 +5,13 @@ class User < Sequel::Model
   # # :confirmable, :lockable, :timeoutable and :omniauthable
   # devise :database_authenticatable, :registerable,
   #        :recoverable, :rememberable, :trackable, :validatable
-  one_to_many :filters
+  one_to_many :filters, order: :precedence
+
+  def filtered_listings
+    listings = Listing.all
+    for filter in self.filters
+      listings = filter.filter(listings)
+    end
+    return listings
+  end
 end
