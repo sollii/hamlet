@@ -10,6 +10,12 @@ Sequel.migration do
       column :zip, "integer"
     end
     
+    create_table(:city_parks_filters) do
+      primary_key :id
+      column :park_names, "varchar(255)"
+      column :distance_to_park, "varchar(255)"
+    end
+    
     create_table(:distance_to_work_filters) do
       primary_key :id
       column :distance_to_work, "integer"
@@ -83,6 +89,8 @@ Sequel.migration do
     
     create_table(:listings) do
       foreign_key :id, :places
+      column :created_at, "timestamp"
+      column :updated_at, "timestamp"
       column :bedrooms, "double precision", :default=>0.0
       column :bathrooms, "double precision", :default=>0.0
       column :sq_footage, "integer", :default=>0
@@ -116,5 +124,6 @@ self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160305052643_cr
 self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160308022603_create_distance_to_work_filters.rb')"
 self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160308023038_create_school_district_filters.rb')"
 self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160311014435_create_parks.rb')"
+self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160314230344_create_city_parks_filters.rb')"
                 end
               end

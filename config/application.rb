@@ -11,6 +11,9 @@ Bundler.require(*Rails.groups)
 
 module Hamlet
   class Application < Rails::Application
+    config.sequel.after_connect = proc do
+      Sequel::Model.plugin :timestamps, update_on_create: true
+    end
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
