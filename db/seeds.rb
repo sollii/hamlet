@@ -5,3 +5,13 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+# Make Users
+[1..100].each do |name|
+  User.create
+end
+
+# Make School Filters
+[1..100].each do |name|
+  SchoolFilter.create(rating)
+end

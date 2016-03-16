@@ -7,8 +7,8 @@ class User < Sequel::Model
   #        :recoverable, :rememberable, :trackable, :validatable
   one_to_many :filters, order: :precedence
 
-  def filtered_listings
-    listings = Listing.all
+  def filter_listings(listings)
+    listings ||= Listing.all
     for filter in self.filters
       listings = filter.filter(listings)
     end
