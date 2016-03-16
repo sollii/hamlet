@@ -1,8 +1,6 @@
-include Math
-
-class SchoolFilter < Filter
+class CityParksFilter < Filter
   def filter(listings)
-    rating = self.rating
+
     desired_school_names = self.desired_schools.split("-")
     desired_schools = School.where{desired_school_names.include? name}.where{gs_rating >= rating}
 
@@ -16,14 +14,14 @@ class SchoolFilter < Filter
 
   private
 
-  def get_school_lat_lon_limit(school)
-    lat = school.address.lat
-    lon = school.address.lon
+  def get_park_lat_lon_limit(park)
+    lat = park.lat
+    lon = park.lon
 
     earth_r = 6378137
 
-    dn = 2000
-    de = 2000
+    dn = 3000
+    de = 3000
 
     dLat = dn/earth_r
     dLon = de/(earth_r*Math.cos(Math::PI*lat/180))
@@ -34,7 +32,7 @@ class SchoolFilter < Filter
     [(lat0-lat).abs, (lon0-lon).abs]
   end
 
-  def is_listing_in_school_range(address, desired_schools, school_lat_lon_limits)
+  def is_listing_in_park_range(address, desired_parks, park_lat_lon_limits)
     address_lat = address.lat
     address_lon = address.lon
     desired_schools.each_with_index do |school, index|

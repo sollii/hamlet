@@ -22,6 +22,15 @@ Sequel.migration do
       column :sq_footage, "varchar(255)"
     end
     
+    create_table(:parks) do
+      primary_key :id
+      column :name, "varchar(255)"
+      column :address, "varchar(255)"
+      column :park_area, "double precision"
+      column :lat, "double precision"
+      column :lon, "double precision"
+    end
+    
     create_table(:schema_migrations) do
       column :filename, "varchar(255)", :null=>false
       
@@ -106,5 +115,6 @@ self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160305030926_ad
 self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160305052643_create_home_characteristics_filters.rb')"
 self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160308022603_create_distance_to_work_filters.rb')"
 self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160308023038_create_school_district_filters.rb')"
+self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160311014435_create_parks.rb')"
                 end
               end
