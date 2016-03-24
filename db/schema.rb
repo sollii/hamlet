@@ -69,9 +69,16 @@ Sequel.migration do
       column :last_sign_in_ip, "varchar(255)"
       column :created_at, "timestamp"
       column :updated_at, "timestamp"
+      column :name, "varchar(255)"
       
       index [:email], :unique=>true
       index [:reset_password_token], :unique=>true
+    end
+    
+    create_table(:area_filters) do
+      primary_key :id
+      column :name, "varchar(255)"
+      foreign_key :address_id, :addresses
     end
     
     create_table(:filters) do
@@ -125,5 +132,7 @@ self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160308022603_cr
 self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160308023038_create_school_district_filters.rb')"
 self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160311014435_create_parks.rb')"
 self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160314230344_create_city_parks_filters.rb')"
+self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160321192315_add_name_to_user.rb')"
+self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160321200222_create_area_filters.rb')"
                 end
               end

@@ -1,0 +1,42 @@
+---
+greeting:
+  bot_messages:
+  - type: message
+    text: Hi I’m Hamlet, your personal real estate agent.
+  - type: message
+    text: I’ll Help you find your dream home!
+  user_actions:
+    type: text_buttons
+    buttons:
+      - text: Yea! Let's get started
+        route: onboarding/get_city
+      - text: "No"
+        route: onboarding/end
+get_city:
+  bot_messages:
+  - type: message
+    text: What city do you want to live in?
+  user_actions:
+    type: text_input
+    placeholder: e.g. Berkeley
+    action: UPDATE_SEARCH_AREA
+    route: onboarding/get_price_range
+get_price_range:
+  bot_messages:
+  - type: message
+    text: Do you have a price range in mind?
+  user_actions:
+    type: text_input
+    placeholder: e.g. 100K - 800K
+    route: onboarding/get_bedrooms
+get_bedrooms:
+  bot_messages:
+  - type: message
+    text: What number of bedrooms would you like?
+  user_actions:
+    type: text_input
+    route: onboarding/end
+end:
+  bot_messages:
+  - type: message
+    text: Good bye
