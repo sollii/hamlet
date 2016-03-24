@@ -9,11 +9,24 @@ class UserController < ApplicationController
     end
   end
 
+  def update
+    User.where(id: user_id).update update_user_params
+    success
+  end
+
+  def success
+    respond_with :ok
+  end
+
   private
 
   # Never trust parameters from the scary internet, only allow the white list through.
 
-  def listing_params
-    {id: params.require(:id)}
+  def user_id
+    params.require(:id)
+  end
+
+  def update_user_params
+    params.require(:user).permit(:name)
   end
 end

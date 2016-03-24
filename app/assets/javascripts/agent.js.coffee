@@ -4,7 +4,7 @@
 
 
 $ ->
-  chat = new Chat("#message-box", "#user-actions")
+  chat = new Chat("#message-box-messages", "#user-actions")
   agent = new ChatBot(chat)
   chat.addChatBot(agent)
   agent.perform("onboarding/greeting")
