@@ -46,7 +46,7 @@ Sequel.migration do
     create_table(:school_filters) do
       primary_key :id
       column :desired_schools, "varchar(255)"
-      column :rating, "varchar(255)"
+      column :rating, "integer"
     end
     
     create_table(:test_filters) do
@@ -102,10 +102,10 @@ Sequel.migration do
       foreign_key :id, :places
       column :name, "varchar(255)"
       column :school_type, "varchar(255)"
-      column :gs_rating, "varchar(255)"
-      column :parent_rating, "varchar(255)"
+      column :gs_rating, "integer"
+      column :parent_rating, "integer"
       column :grade_range, "varchar(255)"
-      column :enrollment, "varchar(255)"
+      column :enrollment, "integer"
       column :website, "varchar(255)"
     end
   end

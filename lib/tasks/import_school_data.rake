@@ -8,10 +8,10 @@ namespace :import_school_data do
       school_data = {
         name: school['name'],
         school_type: school['type'],
-        gs_rating: school['gsRating'],
-        parent_rating: school['parentRating'],
+        gs_rating: school['gsRating'].to_i,
+        parent_rating: school['parentRating'].to_i,
         grade_range: school['gradeRange'],
-        enrollment: school['enrollment'],
+        enrollment: school['enrollment'].to_i,
         website: school['website'],
       }
       address_data = {

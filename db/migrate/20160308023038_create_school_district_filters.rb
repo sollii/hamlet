@@ -4,7 +4,7 @@ Sequel.migration do
     create_table :school_filters do
       primary_key :id
       String :desired_schools
-      String :rating
+      Integer :rating
     end
 
   end
