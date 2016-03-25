@@ -10,3 +10,6 @@ $ ->
   chat.addChatBot(agent)
   agent.perform("onboarding/greeting")
 
+  store = new FilterStore()
+  store.setFilter("Filter", {precedence: 1})
+
