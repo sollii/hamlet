@@ -4,8 +4,9 @@
 
 
 $ ->
+  modules = new ConversationModules(gon.conversation_modules)
   chat = new Chat("#message-box-messages", "#user-actions")
-  agent = new ChatBot(chat)
+  agent = new ChatBot(chat, modules)
   chat.addChatBot(agent)
   agent.perform("onboarding/greeting")
 
