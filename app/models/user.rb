@@ -14,4 +14,17 @@ class User < Sequel::Model
     end
     return listings
   end
+
+  def get_filter(filter_type)
+    for filter in self.filters
+      if filter.filter_type == filter_type
+        return filter
+      end
+    end
+    return nil
+  end
+
+  def create_filter(filter_type)
+    eval(filter_type).create user: self
+  end
 end
