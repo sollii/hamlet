@@ -5,7 +5,7 @@ Sequel.migration do
       primary_key :id
       foreign_key :user_id, :users
       String :filter_type, null: false
-      Integer :precedence
+      Integer :precedence, :default => "0"
     end
 
   end

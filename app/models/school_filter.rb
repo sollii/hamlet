@@ -21,7 +21,7 @@ class SchoolFilter < Filter
     desired_schools.each_with_index do |school, index|
       addr_id += addresses.where{lat < school.address.lat+lat_lon_limits[index]}.where{lat > school.address.lat-lat_lon_limits[index]}.where{lon < school.address.lon+lat_lon_limits[index]}.where{lon > school.address.lon-lat_lon_limits[index]}.all
     end
-    addr_id = addr_id.collect{|address| address.id}
+    addr_id = addr_id.uniq.collect{|address| address.id}
     return listings.where(address_id: addr_id)
   end
 

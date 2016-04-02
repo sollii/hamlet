@@ -2,7 +2,7 @@ class Chat
   constructor: (message_container_selector, actions_container_selector) ->
     @messages_container = $(message_container_selector)
     @actions_container = $(actions_container_selector)
-    @typing_speed = 500
+    @typing_speed = 1000
     @reading_speed = 500
     @message_queue = []
     @typing = false

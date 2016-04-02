@@ -11,14 +11,14 @@ namespace :import_park_data do
         begin
           location = get_lat_long("#{park[:address]}, Berkeley, CA")
           park_data = {
-             name: park[:aame],
+             name: park[:name],
              address: park[:address],
              park_area: park[:shape_area],
              lat: location["lat"],
              lon: location["lng"]
           }
           Park.create park_data
-          puts "created park at #{park[:address]}!"
+          puts "created model for #{park[:name]}!"
         rescue
           puts "error"
         end
