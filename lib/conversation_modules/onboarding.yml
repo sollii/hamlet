@@ -15,7 +15,7 @@ greeting:
 get_city:
   bot_messages:
   - type: message
-    text: What city do you want to live in?
+    text: Great! What city do you want to live in?
   user_actions:
     type: text_input
     placeholder: e.g. Berkeley
@@ -35,8 +35,21 @@ get_bedrooms:
     text: What number of bedrooms would you like?
   user_actions:
     type: text_input
-    route: onboarding/end
+    placeholder: e.g. 3-5, or 3
+    route: onboarding/get_bathrooms
+get_bathrooms:
+  bot_messages:
+  - type: message
+    text: What number of bathrooms would you like?
+  user_actions:
+    type: text_input
+    placeholder: e.g. 2-3, or 2
+    route: onboarding/finished
+finished:
+  bot_messages:
+  - type: message
+    text: Awesome! I'll get searchin' :)
 end:
   bot_messages:
   - type: message
-    text: Good bye
+    text: Okay, goodbye!

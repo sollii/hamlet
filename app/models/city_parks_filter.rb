@@ -1,45 +1,44 @@
 class CityParksFilter < Filter
   def filter(listings)
-
-    desired_school_names = self.desired_schools.split("-")
-    desired_schools = School.where{desired_school_names.include? name}.where{gs_rating >= rating}
-
-    school_lat_lon_limits = []
-    desired_schools.each do |school|
-      school_lat_lon_limits.append(get_school_lat_lon_limit(school))
+    desired_parks = Park
+    if self.park_names != nil and !self.park_names.blank?
+      desired_parks = desired_parks.where(name: self.park_names.split("-"))
     end
-
-    return listings.where{is_listing_in_school_range(address, desired_schools, school_lat_lon_limits)}
+    lat_lon_limits = []
+    desired_parks.each do |park|
+      lat_lon_limits.append(get_park_lat_lon_limit(park, self.distance_to_park.to_i))
+    end
+    address_id_list = []
+    listings.each do |listing|
+      address_id_list.append(listing.address_id)
+    end
+    addresses = Address.where(id: address_id_list)
+    addr_id = []
+    desired_parks.each_with_index do |park, index|
+      if (park.lat != nil && park.lon != nil)
+        addr_id += addresses.where{lat < park.lat+lat_lon_limits[index]}.where{lat > park.lat-lat_lon_limits[index]}.where{lon < park.lon+lat_lon_limits[index]}.where{lon > park.lon-lat_lon_limits[index]}.all
+      end
+    end
+    addr_id = addr_id.uniq.collect{|address| address.id}
+    return listings.where(address_id: addr_id)
   end
 
   private
 
-  def get_park_lat_lon_limit(park)
+  def get_park_lat_lon_limit(park, distance)
     lat = park.lat
     lon = park.lon
-
-    earth_r = 6378137
-
-    dn = 3000
-    de = 3000
-
-    dLat = dn/earth_r
-    dLon = de/(earth_r*Math.cos(Math::PI*lat/180))
-
-    latO = lat + dLat * 180/Pi
-    lonO = lon + dLon * 180/Pi
-
-    [(lat0-lat).abs, (lon0-lon).abs]
-  end
-
-  def is_listing_in_park_range(address, desired_parks, park_lat_lon_limits)
-    address_lat = address.lat
-    address_lon = address.lon
-    desired_schools.each_with_index do |school, index|
-      if (((address_lat - school.address.lat).abs > school_lat_lon_limits[index][0]) && ((address_lon - school.address.lon).abs > school_lat_lon_limits[index][1]))
-        return false
-      end
+    if (lat != nil && lon != nil)
+      earth_r = 6378137
+      dn = distance /1.5
+      de = distance /1.5
+      dLat = dn/earth_r
+      dLon = de/(earth_r*Math.cos(Math::PI*lat/180))
+      latO = lat + dLat * 180/Math::PI
+      lonO = lon + dLon * 180/Math::PI
+      return (lonO-lon).abs
+    else
+      return 0
     end
-    return true
   end
 end

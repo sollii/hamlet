@@ -9,16 +9,16 @@ namespace :import_park_data do
     listings = SmarterCSV.process(filename, options) do |chunk|
       chunk.each do |park|
         begin
-          location = get_lat_long("#{park[:Address]}, Berkeley, CA")
+          location = get_lat_long("#{park[:address]}, Berkeley, CA")
           park_data = {
-             name: park[:Name],
-             address: park[:Address],
-             park_area: park[:Shape_area],
-             lat: location[:lat],
-             lon: location[:lon]
+             name: park[:name],
+             address: park[:address],
+             park_area: park[:shape_area],
+             lat: location["lat"],
+             lon: location["lng"]
           }
           Park.create park_data
-          puts "created park at #{park[:address]}!"
+          puts "created model for #{park[:name]}!"
         rescue
           puts "error"
         end
