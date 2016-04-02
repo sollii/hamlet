@@ -48,7 +48,7 @@ get_bathrooms:
 finished:
   bot_messages:
   - type: message
-    text: Awesome! I'll get searchin' ;)
+    text: Awesome! I'll get searchin' :)
 end:
   bot_messages:
   - type: message

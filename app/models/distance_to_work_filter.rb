@@ -10,9 +10,7 @@ class DistanceToWorkFilter < Filter
       request_url += "&dst=#{listing.address.lat},#{listing.address.lon}"
     end
 
-    puts "Start request.."
     distances_result = JSON.parse(RestClient.get(request_url))["distance_table"][0]
-    puts "Done"
     filtered_address_ids = []
     l = listings.all
     distances_result.each_with_index do |distance, index|
