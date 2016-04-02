@@ -24,6 +24,6 @@ class HomesController < ApplicationController
   end
 
   def initial_listings
-    Listing.all[1..3]
+    Listing.all
   end
 end

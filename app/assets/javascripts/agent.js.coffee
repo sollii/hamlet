@@ -4,12 +4,12 @@
 
 
 $ ->
-  modules = new ConversationModules(gon.conversation_modules)
-  chat = new Chat("#message-box-messages", "#user-actions")
-  agent = new ChatBot(chat, modules)
-  chat.addChatBot(agent)
-  agent.perform("onboarding/greeting")
+  # modules = new ConversationModules(gon.conversation_modules)
+  # chat = new Chat("#message-box-messages", "#user-actions")
+  # agent = new ChatBot(chat, modules)
+  # chat.addChatBot(agent)
+  # agent.perform("onboarding/greeting")
 
-  store = new FilterStore()
-  store.setFilter("Filter", {precedence: 1})
+  # store = new FilterStore()
+  # store.setFilter("Filter", {precedence: 1})
 

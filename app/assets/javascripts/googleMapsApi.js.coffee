@@ -19,7 +19,7 @@ class GoogleMaps
   createListingMarker: (listing) ->
     console.log listing
     new google.maps.Marker({
-      position: listing.latlong,
+      position: listing.latlng,
       map: @map
     })
 

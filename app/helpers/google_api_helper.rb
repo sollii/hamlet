@@ -1,6 +1,7 @@
 module GoogleApiHelper
   @@GOOGLE_API_KEY = 'AIzaSyAi-E59X3_vswQ9fwc5xhxoZhPTYe_kARs'
   @@BASE_URI = 'https://maps.googleapis.com/maps/api'
+  @@chunk_size = 30
 
   def build_url(api, format)
     "#{@@BASE_URI}/#{api}/#{format}"
@@ -20,8 +21,12 @@ module GoogleApiHelper
   end
 
   def destinations_dist_from_source(source, destinations)
-    destinations = destinations.join("|")
-    call_api('distancematrix', 'json', {origins: source, destinations: destinations})
+    responses = []
+    for chunk in destinations.each_slice(@@chunk_size) do
+      destinations = chunk.join("|")
+      responses.append(call_api('distancematrix', 'json', {origins: source, destinations: destinations}))
+    end
+    responses
   end
 
   #Source: String
@@ -30,12 +35,14 @@ module GoogleApiHelper
   #Max_Time: Integer
   def filter_listings_by_dist_from_source(source, listings, max_dist, max_time)
     listing_addresses = listings.collect {|listing| listing.address.to_s}
-    response = destinations_dist_from_source(source, listing_addresses)
-    if (response["status"] == "OK")
-      filtered_listings = []
-      response["rows"][0]["elements"].each_with_index do |result, index|
-        if (result["distance"]["value"] <= max_dist and result["duration"]["value"] <= max_time)
-          filtered_listings.append(listings[index])
+    responses = destinations_dist_from_source(source, listing_addresses)
+    filtered_listings = []
+    for response in responses do
+      if (response["status"] == "OK")
+        response["rows"][0]["elements"].each_with_index do |result, index|
+          if (result["distance"]["value"] <= max_dist and result["duration"]["value"] <= max_time)
+            filtered_listings.append(listings[index])
+          end
         end
       end
     end
