@@ -1,5 +1,4 @@
 class ListRankController < ApplicationController
-    include GeoMathHelper
 
     def home
       @all_listings_in_berkeley = Listing.all.collect {|listing| listing.address}

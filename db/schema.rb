@@ -13,7 +13,7 @@ Sequel.migration do
     create_table(:city_parks_filters) do
       primary_key :id
       column :park_names, "varchar(255)", :default=>""
-      column :distance_to_park, "varchar(255)", :default=>"99999"
+      column :distance_to_park, "varchar(255)", :default=>"0"
     end
     
     create_table(:home_characteristics_filters) do
@@ -41,7 +41,7 @@ Sequel.migration do
     create_table(:school_filters) do
       primary_key :id
       column :desired_schools, "varchar(255)", :default=>""
-      column :rating, "integer", :default=>Sequel::LiteralString.new("'8'")
+      column :rating, "integer", :default=>0
     end
     
     create_table(:test_filters) do
@@ -79,7 +79,7 @@ Sequel.migration do
     create_table(:distance_to_work_filters) do
       primary_key :id
       foreign_key :address_id, :addresses
-      column :distance_to_work, "integer", :default=>Sequel::LiteralString.new("'999999999999'")
+      column :distance_to_work, "integer"
     end
     
     create_table(:filters) do
