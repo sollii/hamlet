@@ -12,6 +12,14 @@ namespace :scrapy do
     end
   end
 
+  desc "Scrape Defaults"
+  task :scrape_defaults => :environment do
+    include ScraperHelper
+    for area in ["Berkeley CA"] do
+      puts scrape_area(area)
+    end
+  end
+
   desc "Scrape Area"
   task :scrape, [:area] => [:environment] do |t, args|
     include ScraperHelper
