@@ -84,9 +84,9 @@ Sequel.migration do
     
     create_table(:filters) do
       primary_key :id
-      foreign_key :user_id, :users
       column :filter_type, "varchar(255)", :null=>false
       column :precedence, "integer", :default=>Sequel::LiteralString.new("'0'")
+      foreign_key :user_id, :users
     end
     
     create_table(:places) do
@@ -135,5 +135,6 @@ self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160311014435_cr
 self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160314230344_create_city_parks_filters.rb')"
 self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160321192315_add_name_to_user.rb')"
 self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160321200222_create_area_filters.rb')"
+self << "INSERT INTO `schema_migrations` (`filename`) VALUES ('20160409091533_add_user_to_filter.rb')"
                 end
               end
