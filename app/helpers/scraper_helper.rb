@@ -3,6 +3,7 @@ module ScraperHelper
   @@PROJECT_ID = '51496'
   @@URI = 'scrapinghub.com'
   @@CONSUMED_TAG = "consumed"
+  @@TEST_TAG = "test"
 
   def build_url(subdomain, method)
     "https://#{subdomain}.#{@@URI}#{method}"
@@ -17,6 +18,12 @@ module ScraperHelper
   def get_unconsumed_jobs()
     url = build_url("dash", "/api/jobs/list.json")
     params = {apikey: @@API_KEY, state: "finished", lacks_tag: @@CONSUMED_TAG, project: @@PROJECT_ID}
+    JSON.parse(RestClient.get(url, {accept: :json, params: params}))
+  end
+
+  def get_test_jobs()
+    url = build_url("dash", "/api/jobs/list.json")
+    params = {apikey: @@API_KEY, state: "finished", has_tag: @@TEST_TAG, project: @@PROJECT_ID}
     JSON.parse(RestClient.get(url, {accept: :json, params: params}))
   end
 

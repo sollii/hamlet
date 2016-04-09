@@ -4,4 +4,8 @@ class Address < Sequel::Model
   def to_s
     "#{self.street}, #{self.city}, #{self.state} #{self.zip}, USA"
   end
+
+  def self.unique?(params)
+    Address.where(params).count == 0
+  end
 end

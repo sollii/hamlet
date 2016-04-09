@@ -1,12 +1,16 @@
 module ListingImportHelper
   def import_listing(listing)
     begin
-      address = Address.create parse_address(listing["address"])
-      listing_data = parse_listing(listing).merge({ address: address })
-      Listing.create listing_data
-      puts "created listing at #{address}!"
+      listing_data = parse_listing(listing)
+      address_data = parse_address(listing["address"])
+      listing = Listing.update_or_create(listing_data, address_data)
+      if listing
+        puts "created listing at #{listing.address}!"
+      else
+        puts "nothing to update"
+      end
     rescue
-      puts "error #{listing}"
+      puts "error"
     end
   end
 

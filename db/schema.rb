@@ -1,4 +1,4 @@
-w.uSequel.migration do
+Sequel.migration do
   change do
     create_table(:addresses) do
       primary_key :id
@@ -9,20 +9,20 @@ w.uSequel.migration do
       column :state, "varchar(255)"
       column :zip, "integer"
     end
-
+    
     create_table(:city_parks_filters) do
       primary_key :id
       column :park_names, "varchar(255)", :default=>""
       column :distance_to_park, "varchar(255)", :default=>"99999"
     end
-
+    
     create_table(:home_characteristics_filters) do
       primary_key :id
       column :bedrooms, "varchar(255)", :default=>""
       column :bathrooms, "varchar(255)", :default=>""
       column :sq_footage, "varchar(255)", :default=>"0"
     end
-
+    
     create_table(:parks) do
       primary_key :id
       column :name, "varchar(255)"
@@ -31,25 +31,25 @@ w.uSequel.migration do
       column :lat, "double precision"
       column :lon, "double precision"
     end
-
+    
     create_table(:schema_migrations) do
       column :filename, "varchar(255)", :null=>false
-
+      
       primary_key [:filename]
     end
-
+    
     create_table(:school_filters) do
       primary_key :id
       column :desired_schools, "varchar(255)", :default=>""
       column :rating, "integer", :default=>Sequel::LiteralString.new("'8'")
     end
-
+    
     create_table(:test_filters) do
       primary_key :id
       column :param_1, "varchar(255)"
       column :param_2, "varchar(255)"
     end
-
+    
     create_table(:users) do
       primary_key :id
       column :email, "varchar(255)", :default=>"", :null=>false
@@ -65,36 +65,36 @@ w.uSequel.migration do
       column :created_at, "timestamp"
       column :updated_at, "timestamp"
       column :name, "varchar(255)"
-
+      
       index [:email], :unique=>true
       index [:reset_password_token], :unique=>true
     end
-
+    
     create_table(:area_filters) do
       primary_key :id
       column :name, "varchar(255)"
       foreign_key :address_id, :addresses
     end
-
+    
     create_table(:distance_to_work_filters) do
       primary_key :id
       foreign_key :address_id, :addresses
       column :distance_to_work, "integer", :default=>Sequel::LiteralString.new("'999999999999'")
     end
-
+    
     create_table(:filters) do
       primary_key :id
       foreign_key :user_id, :users
       column :filter_type, "varchar(255)", :null=>false
       column :precedence, "integer", :default=>Sequel::LiteralString.new("'0'")
     end
-
+    
     create_table(:places) do
       primary_key :id
       foreign_key :address_id, :addresses
       column :place_type, "varchar(255)", :null=>false
     end
-
+    
     create_table(:listings) do
       foreign_key :id, :places
       column :created_at, "timestamp"
@@ -105,7 +105,7 @@ w.uSequel.migration do
       column :year, "integer", :default=>0
       column :price, "integer", :default=>0
     end
-
+    
     create_table(:schools) do
       foreign_key :id, :places
       column :name, "varchar(255)"

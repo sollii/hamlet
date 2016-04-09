@@ -11,4 +11,10 @@ namespace :scrapy do
       consume_job(id)
     end
   end
+
+  desc "Scrape Area"
+  task :scrape, [:area] => [:environment] do |t, args|
+    include ScraperHelper
+    puts scrape_area(args[:area])
+  end
 end
